@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nouari3a.R
-import java.util.ArrayList
+import com.example.nouari3a.presentation.api.CovidResponse
 
-class CovidAdapter(private var dataSet: List<Covid>) :
+class CovidAdapter(private var dataSet: List<CovidResponse>) :
     RecyclerView.Adapter<CovidAdapter.ViewHolder>() {
 
     /**
@@ -24,7 +24,7 @@ class CovidAdapter(private var dataSet: List<Covid>) :
         }
     }
 
-    fun updateList(list: List<Covid>){
+    fun updateList(list: List<CovidResponse>){
         dataSet = list
         notifyDataSetChanged()
     }
@@ -44,8 +44,8 @@ class CovidAdapter(private var dataSet: List<Covid>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        val covid : Covid = dataSet[position]
-        viewHolder.textView.text = covid.name
+        val covid =  dataSet[position]
+        viewHolder.textView.text = covid.Country
     }
 
     // Return the size of your dataset (invoked by the layout manager)
