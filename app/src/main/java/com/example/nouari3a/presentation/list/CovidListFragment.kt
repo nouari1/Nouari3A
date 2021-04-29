@@ -5,11 +5,12 @@ package com.example.nouari3a.presentation.list
     import android.view.View
     import android.view.ViewGroup
     import androidx.fragment.app.Fragment
+    import androidx.navigation.fragment.findNavController
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
     import com.example.nouari3a.R
     import com.example.nouari3a.presentation.api.CovidApi
-    import com.example.nouari3a.presentation.api.CovidResponse
+    import com.example.nouari3a.presentation.api.CovidListResponse
     import retrofit2.Call
     import retrofit2.Callback
     import retrofit2.Response
@@ -24,8 +25,10 @@ package com.example.nouari3a.presentation.list
 class CovidListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private val adapter = CovidAdapter(listOf())
-    private val layoutManager = LinearLayoutManager(context)
+    private val adapter = CovidAdapter(listOf() , ::onClickedCovid)
+
+
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -37,32 +40,35 @@ class CovidListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.covid_recyclerview)
+
         recyclerView.apply {
-            adapter =  this@CovidListFragment.adapter
-            layoutManager = this@CovidListFragment.layoutManager
+            adapter = this@CovidListFragment.adapter
+            layoutManager = LinearLayoutManager(context)
         }
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.covid19api.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+                .baseUrl("https://api.covid19api.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
         val CovidApi: CovidApi = retrofit.create(CovidApi::class.java)
 
-        CovidApi.getCovidList().enqueue(object : Callback<List<CovidResponse>> {
+        CovidApi.getCovidList().enqueue(object : Callback<List<CovidListResponse>> {
 
-            override fun onFailure(call: Call<List<CovidResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<CovidListResponse>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 
-            override fun onResponse(call: Call<List<CovidResponse>>, response: Response<List<CovidResponse>>) {
-                if (response.isSuccessful && response.body() != null){
-                   val covidResponse = response.body()!!
+            override fun onResponse(call: Call<List<CovidListResponse>>, response: Response<List<CovidListResponse>>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val covidResponse = response.body()!!
                     adapter.updateList(covidResponse)
                 }
             }
 
         })
-
-}
+    }
+    private fun onClickedCovid(covidResponse: CovidListResponse) {
+        findNavController().navigate(R.id.navigateToCovidDetailFragment)
+    }
 }

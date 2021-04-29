@@ -6,11 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nouari3a.R
-import com.example.nouari3a.presentation.api.CovidResponse
+import com.example.nouari3a.presentation.api.CovidListResponse
 
-class CovidAdapter(private var dataSet: List<CovidResponse>) :
+class CovidAdapter(private var dataSet: List<CovidListResponse>, var listener: ((CovidListResponse) -> Unit )? = null) :
     RecyclerView.Adapter<CovidAdapter.ViewHolder>() {
-
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -21,10 +20,13 @@ class CovidAdapter(private var dataSet: List<CovidResponse>) :
         init {
             // Define click listener for the ViewHolder's View.
             textView = view.findViewById(R.id.covid_country)
+            textView.setOnClickListener{
+
+            }
         }
     }
 
-    fun updateList(list: List<CovidResponse>){
+    fun updateList(list: List<CovidListResponse>){
         dataSet = list
         notifyDataSetChanged()
     }
@@ -46,6 +48,9 @@ class CovidAdapter(private var dataSet: List<CovidResponse>) :
         // contents of the view with that element
         val covid =  dataSet[position]
         viewHolder.textView.text = covid.Country
+        viewHolder.itemView.setOnClickListener {
+            listener?.invoke(covid)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
