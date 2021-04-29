@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/CovidDetailFragment"
-        android:name="com.example.nouari3a.CovidDetailFragment"
+        android:name="com.example.nouari3a.presentation.detail.CovidDetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_covid_detail">
 

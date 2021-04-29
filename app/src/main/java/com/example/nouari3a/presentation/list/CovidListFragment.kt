@@ -46,14 +46,9 @@ class CovidListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        val retrofit = Retrofit.Builder()
-                .baseUrl("https://api.covid19api.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
 
-        val CovidApi: CovidApi = retrofit.create(CovidApi::class.java)
 
-        CovidApi.getCovidList().enqueue(object : Callback<List<CovidListResponse>> {
+        Singletons.covidApi.getCovidList().enqueue(object : Callback<List<CovidListResponse>> {
 
             override fun onFailure(call: Call<List<CovidListResponse>>, t: Throwable) {
                 TODO("Not yet implemented")

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DCDCDC"
-    tools:context=".CovidDetailFragment">
+    tools:context=".presentation.detail.CovidDetailFragment">
 
 
     <ImageView
@@ -16,50 +16,22 @@
         android:src="@drawable/esiea"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="1dp" />
-
-    <Button
-        android:id="@+id/button_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="600dp"
-        android:text="@string/choix1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choix2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/button_1"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/button_1"
-        app:layout_constraintTop_toBottomOf="@id/button_1"
-        app:layout_constraintVertical_bias="0.081" />
-
-    <Button
-        android:id="@+id/button_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choix3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/button_second"
-        app:layout_constraintStart_toStartOf="@id/button_second"
-        app:layout_constraintTop_toBottomOf="@id/button_second"
-        app:layout_constraintVertical_bias="0.1" />
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textview_bottom"
+        android:id="@+id/covid_detail_country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="768dp"
-        android:text="@string/auteur"
-        android:textSize="@dimen/fab_margin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        tools:text="France"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

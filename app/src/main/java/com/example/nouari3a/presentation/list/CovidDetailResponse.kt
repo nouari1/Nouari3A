@@ -1,4 +1,4 @@
-package com.example.nouari3a.presentation.api
+package com.example.nouari3a.presentation.list
 
 data class CovidDetailResponse (
     val Confirmed: Int,
