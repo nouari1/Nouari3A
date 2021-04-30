@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class Singletons {
     companion object{
-        internal val covidApi: CovidApi = Retrofit.Builder()
+         val covidApi: CovidApi = Retrofit.Builder()
             .baseUrl("https://api.covid19api.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()

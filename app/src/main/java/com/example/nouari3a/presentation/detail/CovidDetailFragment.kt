@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import com.example.nouari3a.R
-import com.example.nouari3a.presentation.list.CovidDetailResponse
+import com.example.nouari3a.presentation.api.CovidListResponse
 import com.example.nouari3a.presentation.list.Singletons
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,29 +37,22 @@ class CovidDetailFragment : Fragment() {
     }
 
     private fun callApi() {
-        Singletons.covidApi.getCovidDetail("France").enqueue(object : Callback<CovidDetailResponse>){
-             fun onFailure(
-                call : Call<CovidDetailResponse>,
-                t: Throwable
-            ){
-
+        Singletons.covidApi.getCovidDetail("France").enqueue(object : Callback<CovidDetailResponse> {
+            override fun onFailure(call: Call<CovidDetailResponse>, t: Throwable) {
+                TODO("Not yet implemented")
             }
-             fun onResponse(
-                call :  Call<CovidDetailResponse>,
-                response: Response <CovidDetailResponse>
-            ){
-                 if (response.isSuccessful && response.body() != null) {
-                textViewName.text= response.body()!!.Active.toString()
-                 }
+            override fun onResponse(
+                call: Call<CovidDetailResponse>,
+                response: Response<CovidDetailResponse>
+            ) {
+                if (response.isSuccessful && response.body() != null){
+                    textViewName.text = response.body()!!.Active.toString()
+                }
             }
-        }
-    }
+
+        })
 
 
-}
 
-private fun <T> Call<T>.enqueue(callback: Callback<CovidDetailResponse>, function: () -> Unit) {
-
-}
-
+}}
 
