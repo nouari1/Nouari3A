@@ -18,6 +18,13 @@ import retrofit2.Response
  */
 class CovidDetailFragment : Fragment() {
     private lateinit var textViewName: TextView
+    private lateinit var textViewActive: TextView
+    private lateinit var textViewConfirmed: TextView
+    private lateinit var textViewDeaths: TextView
+    private lateinit var textViewRecovered: TextView
+    private lateinit var textViewDate: TextView
+
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -29,6 +36,11 @@ class CovidDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textViewName = view.findViewById(R.id.covid_detail_country);
+        textViewActive = view.findViewById(R.id.covid_detail_active);
+        textViewConfirmed = view.findViewById(R.id.covid_detail_confirmed);
+        textViewDeaths = view.findViewById(R.id.covid_detail_deaths);
+        textViewRecovered=view.findViewById(R.id.covid_detail_recovered);
+        textViewDate=view.findViewById(R.id.covid_detail_date);
         callApi()
  //       view.findViewById<Button>(R.id.button_1).setOnClickListener {
    //         findNavController().navigate(R.id.navigateToCovidListFragment)
@@ -37,16 +49,23 @@ class CovidDetailFragment : Fragment() {
     }
 
     private fun callApi() {
-        Singletons.covidApi.getCovidDetail("France").enqueue(object : Callback<CovidDetailResponse> {
-            override fun onFailure(call: Call<CovidDetailResponse>, t: Throwable) {
+        val id = arguments?.getInt("covidId") ?: -1
+        Singletons.covidApi.getCovidDetail(id).enqueue(object : Callback<List<CovidDetailResponse>> {
+            override fun onFailure(call: Call<List<CovidDetailResponse>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
             override fun onResponse(
-                call: Call<CovidDetailResponse>,
-                response: Response<CovidDetailResponse>
+                call: Call<List<CovidDetailResponse>>,
+                response: Response<List<CovidDetailResponse>>
             ) {
                 if (response.isSuccessful && response.body() != null){
-                    textViewName.text = response.body()!!.Active.toString()
+                    textViewActive.text = "Active : " + response.body()!![0].Active.toString()
+                    textViewConfirmed.text = "Confirmed : " + response.body()!![0].Confirmed.toString()
+                    textViewDeaths.text = "Deaths : " + response.body()!![0].Deaths.toString()
+                    textViewRecovered.text = "Recovered : " + response.body()!![0].Recovered.toString()
+                    textViewName.text = "Province : " + response.body()!![0].Province.toString()
+                    textViewDate.text = "Date : "+ response.body()!![0].Date.toString()
+
                 }
             }
 

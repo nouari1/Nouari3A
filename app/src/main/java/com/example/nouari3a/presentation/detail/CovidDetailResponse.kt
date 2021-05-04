@@ -6,7 +6,10 @@ data class CovidDetailResponse (
         val Confirmed: Int,
         val Deaths: Int,
         val Recovered: Int,
-        val Active: Int
+        val Active: Int,
+        val Province: String,
+        val Date: String,
+        val TotalConfirmed: Int
 )
 /*
 data class CovidCountry (

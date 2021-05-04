@@ -11,7 +11,7 @@ interface CovidApi {
     fun getCovidList(): Call<List<CovidListResponse>>
 
 
-    @GET("country/{{id}}")
-    fun getCovidDetail(@Path("id") id:String): Call<CovidDetailResponse>
+    @GET("country/{id}")
+    fun getCovidDetail(@Path("id") id:Int): Call<List<CovidDetailResponse>>
 }
 

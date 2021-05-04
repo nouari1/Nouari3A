@@ -14,7 +14,7 @@ class CovidAdapter(private var dataSet: List<CovidListResponse>, var listener: (
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-  //  val listener: ((CovidListResponse) -> Unit)? =null
+  // val listener: ((CovidListResponse) -> Unit)? =null
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
 

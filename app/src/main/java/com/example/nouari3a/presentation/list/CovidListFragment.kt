@@ -64,6 +64,6 @@ class CovidListFragment : Fragment() {
         })
     }
     private fun onClickedCovid(covidResponse: CovidListResponse) {
-        findNavController().navigate(R.id.navigateToCovidDetailFragment)
+        findNavController().navigate(R.id.navigateToCovidDetailFragment, arguments)
     }
 }
