@@ -17,13 +17,13 @@ import retrofit2.Response
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class CovidDetailFragment : Fragment() {
-    private lateinit var textViewName: TextView
+    private lateinit var textViewProvince: TextView
     private lateinit var textViewActive: TextView
     private lateinit var textViewConfirmed: TextView
     private lateinit var textViewDeaths: TextView
     private lateinit var textViewRecovered: TextView
     private lateinit var textViewDate: TextView
-
+    private lateinit var textViewCountryName: TextView
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -35,12 +35,13 @@ class CovidDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textViewName = view.findViewById(R.id.covid_detail_country);
+        textViewProvince = view.findViewById(R.id.covid_detail_country);
         textViewActive = view.findViewById(R.id.covid_detail_active);
         textViewConfirmed = view.findViewById(R.id.covid_detail_confirmed);
         textViewDeaths = view.findViewById(R.id.covid_detail_deaths);
         textViewRecovered=view.findViewById(R.id.covid_detail_recovered);
         textViewDate=view.findViewById(R.id.covid_detail_date);
+        textViewCountryName=view.findViewById(R.id.covid_detail_countryname);
         callApi()
  //       view.findViewById<Button>(R.id.button_1).setOnClickListener {
    //         findNavController().navigate(R.id.navigateToCovidListFragment)
@@ -49,7 +50,7 @@ class CovidDetailFragment : Fragment() {
     }
 
     private fun callApi() {
-        val id = arguments?.getInt("covidId") ?: -1
+        val id = arguments?.getString("covidId") ?: ""
         Singletons.covidApi.getCovidDetail(id).enqueue(object : Callback<List<CovidDetailResponse>> {
             override fun onFailure(call: Call<List<CovidDetailResponse>>, t: Throwable) {
                 TODO("Not yet implemented")
@@ -59,12 +60,16 @@ class CovidDetailFragment : Fragment() {
                 response: Response<List<CovidDetailResponse>>
             ) {
                 if (response.isSuccessful && response.body() != null){
-                    textViewActive.text = "Active : " + response.body()!![0].Active.toString()
-                    textViewConfirmed.text = "Confirmed : " + response.body()!![0].Confirmed.toString()
-                    textViewDeaths.text = "Deaths : " + response.body()!![0].Deaths.toString()
-                    textViewRecovered.text = "Recovered : " + response.body()!![0].Recovered.toString()
-                    textViewName.text = "Province : " + response.body()!![0].Province.toString()
-                    textViewDate.text = "Date : "+ response.body()!![0].Date.toString()
+                    textViewCountryName.text = "Pays : " + response.body()!![300].Country.toString()
+                    textViewActive.text = "Active : " + response.body()!![300].Active.toString()
+                    textViewConfirmed.text = "Confirmed : " + response.body()!![300].Confirmed.toString()
+                    textViewDeaths.text = "Deaths : " + response.body()!![300].Deaths.toString()
+                    textViewRecovered.text = "Recovered : " + response.body()!![300].Recovered.toString()
+                    if (response.body()!![300].Province.toString() == ""){
+                    }else{
+                        textViewProvince.text = "Province : " + response.body()!![300].Province.toString()
+                    }
+                    textViewDate.text = "Date : "+ response.body()!![300].Date.toString()
 
                 }
             }

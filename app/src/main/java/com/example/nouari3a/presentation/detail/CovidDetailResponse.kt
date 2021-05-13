@@ -1,8 +1,7 @@
 package com.example.nouari3a.presentation.detail
 
 data class CovidDetailResponse (
-       // val countries: List<CovidCountry>,
-      //  val country:String
+        val Country: String,
         val Confirmed: Int,
         val Deaths: Int,
         val Recovered: Int,

@@ -23,8 +23,8 @@
 
         <argument
             android:name="covidId"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            app:argType="string"
+            />
 
         <action
             android:id="@+id/navigateToCovidListFragment"

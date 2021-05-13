@@ -4,6 +4,7 @@ package com.example.nouari3a.presentation.list
     import android.view.LayoutInflater
     import android.view.View
     import android.view.ViewGroup
+    import androidx.core.os.bundleOf
     import androidx.fragment.app.Fragment
     import androidx.navigation.fragment.findNavController
     import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,6 +65,8 @@ class CovidListFragment : Fragment() {
         })
     }
     private fun onClickedCovid(covidResponse: CovidListResponse) {
-        findNavController().navigate(R.id.navigateToCovidDetailFragment, arguments)
+        findNavController().navigate(R.id.navigateToCovidDetailFragment, bundleOf(
+                "covidId" to covidResponse.Country
+        ))
     }
 }
