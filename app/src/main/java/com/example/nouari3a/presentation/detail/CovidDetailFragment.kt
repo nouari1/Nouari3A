@@ -60,16 +60,16 @@ class CovidDetailFragment : Fragment() {
                 response: Response<List<CovidDetailResponse>>
             ) {
                 if (response.isSuccessful && response.body() != null){
-                    textViewCountryName.text = "Pays : " + response.body()!![300].Country.toString()
-                    textViewActive.text = "Active : " + response.body()!![300].Active.toString()
-                    textViewConfirmed.text = "Confirmed : " + response.body()!![300].Confirmed.toString()
-                    textViewDeaths.text = "Deaths : " + response.body()!![300].Deaths.toString()
-                    textViewRecovered.text = "Recovered : " + response.body()!![300].Recovered.toString()
+                    textViewCountryName.text = "Pays : " + response.body()!!.last().Country.toString()
+                    textViewActive.text = "Active : " + response.body()!!.last().Active.toString()
+                    textViewConfirmed.text = "Confirmed : " + response.body()!!.last().Confirmed.toString()
+                    textViewDeaths.text = "Deaths : " + response.body()!!.last().Deaths.toString()
+                    textViewRecovered.text = "Recovered : " + response.body()!!.last().Recovered.toString()
                     if (response.body()!![300].Province.toString() == ""){
                     }else{
-                        textViewProvince.text = "Province : " + response.body()!![300].Province.toString()
+                        textViewProvince.text = "Province : " + response.body()!!.last().Province.toString()
                     }
-                    textViewDate.text = "Date : "+ response.body()!![300].Date.toString()
+                    textViewDate.text = "Date : "+ response.body()!!.last().Date.toString()
 
                 }
             }
