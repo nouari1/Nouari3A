@@ -3,8 +3,10 @@ package com.example.nouari3a.presentation.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.nouari3a.R
 import com.example.nouari3a.presentation.api.CovidListResponse
 
@@ -16,14 +18,15 @@ class CovidAdapter(private var dataSet: List<CovidListResponse>, var listener: (
      */
   // val listener: ((CovidListResponse) -> Unit)? =null
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
+        val textView: TextView = view.findViewById(R.id.covid_country)
+        val imageView: ImageView
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.covid_country)
             textView.setOnClickListener{
 
             }
+            imageView = view.findViewById(R.id.covid_img)
         }
     }
 
@@ -52,6 +55,14 @@ class CovidAdapter(private var dataSet: List<CovidListResponse>, var listener: (
         viewHolder.itemView.setOnClickListener {
             listener?.invoke(covid);
         }
+
+
+        Glide
+            .with(viewHolder.itemView.context)
+            .load("https://flagcdn.com/16x12/${position}}.png")
+            .centerCrop()
+            .into(viewHolder.imageView)
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
