@@ -6,6 +6,7 @@ package com.example.nouari3a.presentation.list
     import android.view.ViewGroup
     import androidx.core.os.bundleOf
     import androidx.fragment.app.Fragment
+    import androidx.fragment.app.viewModels
     import androidx.navigation.fragment.findNavController
     import androidx.recyclerview.widget.LinearLayoutManager
     import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ package com.example.nouari3a.presentation.list
     import retrofit2.Response
     import retrofit2.Retrofit
     import retrofit2.converter.gson.GsonConverterFactory
-
+    import java.util.*
 
 
 /**
@@ -28,6 +29,7 @@ class CovidListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val adapter = CovidAdapter(listOf() , ::onClickedCovid)
 
+    private val viewModel: CovidListViewModel by viewModels ()
 
 
     override fun onCreateView(
@@ -47,22 +49,11 @@ class CovidListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-
-
-        Singletons.covidApi.getCovidList().enqueue(object : Callback<List<CovidListResponse>> {
-
-            override fun onFailure(call: Call<List<CovidListResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onResponse(call: Call<List<CovidListResponse>>, response: Response<List<CovidListResponse>>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val covidResponse = response.body()!!
-                    adapter.updateList(covidResponse)
-                }
-            }
-
+        viewModel.covidList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            list -> adapter.updateList(list)
         })
+
+
     }
     private fun onClickedCovid(covidResponse: CovidListResponse) {
         findNavController().navigate(R.id.navigateToCovidDetailFragment, bundleOf(
