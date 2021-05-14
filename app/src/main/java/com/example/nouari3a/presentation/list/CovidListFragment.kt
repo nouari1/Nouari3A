@@ -4,7 +4,10 @@ package com.example.nouari3a.presentation.list
     import android.view.LayoutInflater
     import android.view.View
     import android.view.ViewGroup
+    import android.widget.ProgressBar
+    import android.widget.TextView
     import androidx.core.os.bundleOf
+    import androidx.core.view.isVisible
     import androidx.fragment.app.Fragment
     import androidx.fragment.app.viewModels
     import androidx.navigation.fragment.findNavController
@@ -28,7 +31,8 @@ class CovidListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private val adapter = CovidAdapter(listOf() , ::onClickedCovid)
-
+    private lateinit var  loader: ProgressBar
+    private lateinit var  textViewError: TextView
     private val viewModel: CovidListViewModel by viewModels ()
 
 
@@ -43,14 +47,19 @@ class CovidListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.covid_recyclerview)
-
+        loader = view.findViewById(R.id.covid_loader)
+        textViewError = view.findViewById(R.id.covid_error)
         recyclerView.apply {
             adapter = this@CovidListFragment.adapter
             layoutManager = LinearLayoutManager(context)
         }
 
-        viewModel.covidList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            list -> adapter.updateList(list)
+        viewModel.covidList.observe(viewLifecycleOwner, androidx.lifecycle.Observer { covidModel ->
+            loader.isVisible = covidModel is CovidLoader
+            textViewError.isVisible = covidModel is CovidError
+            if( covidModel is CovidSucess) {
+                adapter.updateList(covidModel.covidList)
+            }
         })
 
 

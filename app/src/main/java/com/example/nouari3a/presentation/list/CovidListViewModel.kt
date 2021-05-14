@@ -10,23 +10,27 @@ import retrofit2.Response
 
 class CovidListViewModel: ViewModel(){
 
-    val covidList : MutableLiveData <List<CovidListResponse>> = MutableLiveData()
+    val covidList : MutableLiveData <CovidModel> = MutableLiveData()
 
     init {
         callApi()
     }
 
     private fun callApi() {
+        covidList.value = CovidLoader
     Singletons.covidApi.getCovidList().enqueue(object : Callback<List<CovidListResponse>> {
 
         override fun onFailure(call: Call<List<CovidListResponse>>, t: Throwable) {
-            TODO("Not yet implemented")
+
+            covidList.value = CovidError
         }
 
         override fun onResponse(call: Call<List<CovidListResponse>>, response: Response<List<CovidListResponse>>) {
             if (response.isSuccessful && response.body() != null) {
                 val covidResponse = response.body()!!
-                covidList.value = covidResponse
+                covidList.value = CovidSucess (covidResponse)
+            }else {
+                covidList.value = CovidError
             }
         }
 
