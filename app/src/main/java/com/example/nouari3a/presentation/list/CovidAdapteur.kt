@@ -51,6 +51,8 @@ class CovidAdapter(private var dataSet: List<CovidListResponse>, var listener: (
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         val covid =  dataSet[position]
+        val covidResponse : CovidListResponse = dataSet[position]
+        val flag = covidResponse.ISO2
         viewHolder.textView.text = covid.Country
         viewHolder.itemView.setOnClickListener {
             listener?.invoke(covid);
@@ -58,8 +60,10 @@ class CovidAdapter(private var dataSet: List<CovidListResponse>, var listener: (
 
 
         Glide
+
             .with(viewHolder.itemView.context)
-            .load("https://flagcdn.com/16x12/${position}}.png")
+
+            .load("https://www.countryflags.io/${flag}/flat/64.png")
             .centerCrop()
             .into(viewHolder.imageView)
 

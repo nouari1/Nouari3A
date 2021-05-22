@@ -65,7 +65,7 @@ class CovidDetailFragment : Fragment() {
                     textViewConfirmed.text = "Confirmed : " + response.body()!!.last().Confirmed.toString()
                     textViewDeaths.text = "Deaths : " + response.body()!!.last().Deaths.toString()
                     textViewRecovered.text = "Recovered : " + response.body()!!.last().Recovered.toString()
-                    if (response.body()!![300].Province.toString() == ""){
+                    if (response.body()!!.last().Province.toString() == ""){
                     }else{
                         textViewProvince.text = "Province : " + response.body()!!.last().Province.toString()
                     }
