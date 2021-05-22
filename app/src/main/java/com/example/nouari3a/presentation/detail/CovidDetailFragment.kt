@@ -53,7 +53,7 @@ class CovidDetailFragment : Fragment() {
         val id = arguments?.getString("covidId") ?: ""
         Singletons.covidApi.getCovidDetail(id).enqueue(object : Callback<List<CovidDetailResponse>> {
             override fun onFailure(call: Call<List<CovidDetailResponse>>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
             override fun onResponse(
                 call: Call<List<CovidDetailResponse>>,
