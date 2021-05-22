@@ -18,3 +18,6 @@ Sur cette image on voit la liste des pays :
 
 ![](https://media.discordapp.net/attachments/396036786352029697/845626068429963264/unknown.png?width=261&height=586)
 
+Ici, on a le détail pour un pays : l'Allemagne 
+
+![](https://media.discordapp.net/attachments/396036786352029697/845626173023453205/unknown.png?width=274&height=586)
