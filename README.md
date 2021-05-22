@@ -21,3 +21,17 @@ Sur cette image on voit la liste des pays :
 Ici, on a le détail pour un pays : l'Allemagne 
 
 ![](https://media.discordapp.net/attachments/396036786352029697/845626173023453205/unknown.png?width=274&height=586)
+
+Là, pour un autre pays, Latvia
+
+![](https://media.discordapp.net/attachments/396036786352029697/845626233424969728/unknown.png?width=265&height=586)
+
+
+Lorsque l'on active le mode avion et qu'on reclique sur l'Allemgne, les données sont stockés en cache donc on a ca : 
+
+![](https://media.discordapp.net/attachments/396036786352029697/845627360526598144/unknown.png?width=261&height=586)
+
+
+Et si on éteint l'application et qu'on la rallume en mode Avion, on a un écran d'échec de connexion : 
+
+![](https://media.discordapp.net/attachments/396036786352029697/845626420213317672/unknown.png?width=280&height=585)
