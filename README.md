@@ -13,6 +13,8 @@ La liste est affiché avec une RecyclerView, les données sont stockés en cache
 
 Il se peut que j'ai mal configuré mon github mais mon projet se trouve sous la branche qui se nomme "developp" et non pas "master" 
 
+Pour accéder au détail, j'ai remarqué qu'il faut cliquer un peu en dessous du nom du pays.
+
 ### Screens
 Sur cette image on voit la liste des pays :
 
