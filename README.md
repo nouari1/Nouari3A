@@ -16,5 +16,5 @@ Il se peut que j'ai mal configuré mon github mais mon projet se trouve sous la 
 ### Screens
 
 Sur cette image on voit la liste des pays : 
-https://media.discordapp.net/attachments/396036786352029697/845626068429963264/unknown.png?width=261&height=586 
+![alt text](https://media.discordapp.net/attachments/396036786352029697/845626068429963264/unknown.png?width=261&height=586)
 
